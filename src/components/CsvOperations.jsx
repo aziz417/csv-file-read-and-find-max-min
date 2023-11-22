@@ -27,23 +27,23 @@ const CsvOperations = () => {
         }
     };
 
-    const downloadAsPdf = () => {
-        const pdfContent = document.getElementById('pdf-content').outerHTML;
+    // const downloadAsPdf = () => {
+    //     const pdfContent = document.getElementById('pdf-content').outerHTML;
 
-        // Create a new Blob containing the HTML content
-        const blob = new Blob([`<!DOCTYPE html><html><head><title>Table PDF</title></head><body>${pdfContent.innerHTML}</body></html>`], { type: 'application/pdf' });
+    //     // Create a new Blob containing the HTML content
+    //     const blob = new Blob([`<!DOCTYPE html><html><head><title>Table PDF</title></head><body>${pdfContent.innerHTML}</body></html>`], { type: 'application/pdf' });
 
-        // Create a download link
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'table.pdf';
+    //     // Create a download link
+    //     const link = document.createElement('a');
+    //     link.href = URL.createObjectURL(blob);
+    //     link.download = 'table.pdf';
 
-        // Trigger the download
-        link.click();
+    //     // Trigger the download
+    //     link.click();
 
-        // Clean up
-        URL.revokeObjectURL(link.href);
-    };
+    //     // Clean up
+    //     URL.revokeObjectURL(link.href);
+    // };
 
     return (
         <div>
@@ -56,11 +56,11 @@ const CsvOperations = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((row, index) => (
+                        {/* {data.map((row, index) => (
                             <tr key={index}>
                                 <td>{row[0]}</td>
                             </tr>
-                        ))}
+                        ))} */}
                     </tbody>
                 </table>
             </div>
@@ -70,7 +70,7 @@ const CsvOperations = () => {
                 {/* {allData?.map(v => <p>Min Value: {v}</p>)} */}
 
             </div>
-            <button onClick={downloadAsPdf}>Download as PDF</button>
+            {/* <button onClick={downloadAsPdf}>Download as PDF</button> */}
         </div>
     );
 };
