@@ -20,6 +20,20 @@ const Step1 = ({ formData, onChange, onNextStep }) => {
                 required={true}
             />
 
+            <Input
+                name='client'
+                label="Client"
+                type="text"
+                required={true}
+            />
+
+            <Input
+                name='contractor'
+                label="Contractor"
+                type="text"
+                required={true}
+            />
+
             {/* <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
                     Project Name:

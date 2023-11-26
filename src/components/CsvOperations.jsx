@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useAllInfo } from "../context/AllInformation";
 
 const CsvOperations = () => {
     const [data, setData] = useState([]);
     const [maxValue, setMaxValue] = useState(null);
     const [minValue, setMinValue] = useState(null);
     const [allData, setAlldata] = useState(null);
+
+    const { formData, setFormData } = useAllInfo();
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -15,7 +18,21 @@ const CsvOperations = () => {
                 setData(csvData);
 
                 // Find max and min values from the CSV data
-                const values = csvData.slice(1, -1).map(row => parseFloat(row[3])); // Assuming the values are in the first column
+                var dataList = { x: [1], y: [2], z: [3] }
+                csvData.slice(1, -1).map(row => { 
+                    dataList.x.push(parseFloat(row[1])),
+                    // dataList['y'].push(parseFloat(row[2])),
+                    // dataList['z'].push(parseFloat(row[3]))
+                  
+                }); // Assuming the values are in the first column
+                let values = csvData.slice(1, -1).map(row => parseFloat(row[1]))
+                console.log(dataList.x.push(5), 'ggggggggg');
+                setFormData(
+                    {
+                        ...formData,
+                        'max_x': Math.max(...values),
+                        'min_x': Math.min(...values),
+                    });
 
                 setMaxValue(Math.max(...values));
                 setMinValue(Math.min(...values));
@@ -27,50 +44,11 @@ const CsvOperations = () => {
         }
     };
 
-    // const downloadAsPdf = () => {
-    //     const pdfContent = document.getElementById('pdf-content').outerHTML;
-
-    //     // Create a new Blob containing the HTML content
-    //     const blob = new Blob([`<!DOCTYPE html><html><head><title>Table PDF</title></head><body>${pdfContent.innerHTML}</body></html>`], { type: 'application/pdf' });
-
-    //     // Create a download link
-    //     const link = document.createElement('a');
-    //     link.href = URL.createObjectURL(blob);
-    //     link.download = 'table.pdf';
-
-    //     // Trigger the download
-    //     link.click();
-
-    //     // Clean up
-    //     URL.revokeObjectURL(link.href);
-    // };
-
     return (
         <div>
             <input type="file" onChange={handleFileChange} />
-            <div id="pdf-content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* {data.map((row, index) => (
-                            <tr key={index}>
-                                <td>{row[0]}</td>
-                            </tr>
-                        ))} */}
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <p>Max Value: {maxValue}</p>
-                <p>Min Value: {minValue}</p>
-                {/* {allData?.map(v => <p>Min Value: {v}</p>)} */}
-
-            </div>
-            {/* <button onClick={downloadAsPdf}>Download as PDF</button> */}
+            <div>{maxValue}</div>
+            <div>{minValue}</div>
         </div>
     );
 };

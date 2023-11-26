@@ -13,12 +13,17 @@ const Form = () => {
         project_description: '',
         client: '',
         contractor: '',
-        phoneNumber: '',
+        max_x: '',
+        max_y: '',
+        max_z: '',
+        min_x: '',
+        min_y: '',
+        min_z: '',
+     
     });
 
     const handleNextStep = () => {
         setStep(step + 1);
-        console.log(formData);
     };
 
     const handlePrevStep = () => {
