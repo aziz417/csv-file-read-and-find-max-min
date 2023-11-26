@@ -18,20 +18,24 @@ const CsvOperations = () => {
                 setData(csvData);
 
                 // Find max and min values from the CSV data
-                var dataList = { x: [1], y: [2], z: [3] }
+                var dataList = { "x": [], "y": [], "z": [] }
                 csvData.slice(1, -1).map(row => { 
-                    dataList.x.push(parseFloat(row[1])),
-                    // dataList['y'].push(parseFloat(row[2])),
-                    // dataList['z'].push(parseFloat(row[3]))
-                  
+                    dataList.x.push(parseFloat(row[1]))
+                    dataList.y.push(parseFloat(row[2]))
+                    dataList.z.push(parseFloat(row[3]))
                 }); // Assuming the values are in the first column
+
                 let values = csvData.slice(1, -1).map(row => parseFloat(row[1]))
-                console.log(dataList.x.push(5), 'ggggggggg');
+                console.log(dataList);
                 setFormData(
                     {
                         ...formData,
-                        'max_x': Math.max(...values),
-                        'min_x': Math.min(...values),
+                        'max_x': Math.max(...dataList.x),
+                        'min_x': Math.min(...dataList.x),
+                        'max_y': Math.max(...dataList.y),
+                        'min_y': Math.min(...dataList.y),
+                        'max_z': Math.max(...dataList.z),
+                        'min_z': Math.min(...dataList.z),
                     });
 
                 setMaxValue(Math.max(...values));
@@ -45,11 +49,13 @@ const CsvOperations = () => {
     };
 
     return (
-        <div>
+        <div className='mb-4 my-4'>
+            <label htmlFor={'file'} className="block text-gray-700 text-sm font-bold mb-2">
+                Please Choose upload a csv file:
+            </label>
             <input type="file" onChange={handleFileChange} />
-            <div>{maxValue}</div>
-            <div>{minValue}</div>
         </div>
+
     );
 };
 

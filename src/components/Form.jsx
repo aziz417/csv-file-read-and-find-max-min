@@ -44,7 +44,7 @@ const Form = () => {
 
     return (
         <AllInfoContext.Provider value={{ formData, setFormData } } >
-            <div className="max-w-md mx-auto mt-8 p-4 bg-gray-200 rounded">
+            <div className="max-w-md mx-auto mt-8 p-4 bg-gray-300 rounded">
                 {step === 1 && (
                     <Step1
                         formData={formData}
@@ -62,16 +62,9 @@ const Form = () => {
                     />
                 )}
 
-                {step === 3 && (
-                    <Step3
-                        formData={formData}
-                        onChange={handleChange}
-                        onNextStep={handleNextStep}
-                        onPrevStep={handlePrevStep}
-                    />
-                )}
+              
 
-                {step === 4 && (
+                {step === 3 && (
                     <DisplayData
                         formData={formData}
                         onPrevStep={handlePrevStep}

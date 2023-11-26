@@ -11,27 +11,23 @@ const Step1 = ({ formData, onChange, onNextStep }) => {
                 name='project_name'
                 label="Project Name"
                 type="text"
-                required={false}
             />
             <Input
                 name='project_description'
                 label="Project Description"
                 type="text"
-                required={true}
             />
 
             <Input
                 name='client'
                 label="Client"
                 type="text"
-                required={true}
             />
 
             <Input
                 name='contractor'
                 label="Contractor"
                 type="text"
-                required={true}
             />
 
             {/* <div className="mb-4">
