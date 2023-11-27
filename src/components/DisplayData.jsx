@@ -3,10 +3,11 @@ import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { useRef } from 'react';
 import html2pdf from 'html2pdf.js';
+import CSVUploadChart from './CSVUploadChart';
 
 const DisplayData = ({ formData, onPrevStep, onSubmit }) => {
-  
-    
+
+
     const divRef = useRef(null);
 
     const handleDownload = () => {
@@ -25,18 +26,18 @@ const DisplayData = ({ formData, onPrevStep, onSubmit }) => {
         // Use html2pdf to generate the PDF
         html2pdf(content, options);
     };
-    
 
-        return (
-            <div>
-                <CSSTransition
-                    in={true}
-                    timeout={300}
-                    classNames="fade"
-                    unmountOnExit
-                >
-                    <div >
-                        <div></div>
+
+    return (
+        <div>
+            <CSSTransition
+                in={true}
+                timeout={300}
+                classNames="fade"
+                unmountOnExit
+            >
+                <div >
+                    <div ref={divRef}>
                         <h2 className="text-lg font-semibold mb-4">Display Data</h2>
 
                         <table className="w-full border-collapse border border-gray-800 mt-4" >
@@ -55,32 +56,33 @@ const DisplayData = ({ formData, onPrevStep, onSubmit }) => {
                                 ))}
                             </tbody>
                         </table>
-
-                        <div className="mt-4">
-                            <button
-                                className="bg-blue-500 text-white px-4 py-2 rounded"
-                                onClick={onPrevStep}
-                            >
-                                Previous
-                            </button>
-                            <button
-                                className="bg-green-500 text-white px-4 py-2 rounded ml-2"
-                                onClick={onSubmit}
-                            >
-                                Submit
-                            </button>
-
-                            <button
-                                className="bg-green-500 text-white px-4 py-2 rounded ml-2"
-                                onClick={handleDownload}
-                            >
-                                Download PDF
-                            </button>
-                        </div>
                     </div>
-                </CSSTransition>
-            </div>
-        );
-    };
+                    <CSVUploadChart />
+                    <div className="mt-4">
+                        <button
+                            className="bg-blue-500 text-white px-4 py-2 rounded"
+                            onClick={onPrevStep}
+                        >
+                            Previous
+                        </button>
+                        <button
+                            className="bg-green-500 text-white px-4 py-2 rounded ml-2"
+                            onClick={onSubmit}
+                        >
+                            Submit
+                        </button>
 
-    export default DisplayData;
+                        <button
+                            className="bg-green-500 text-white px-4 py-2 rounded ml-2"
+                            onClick={handleDownload}
+                        >
+                            Download PDF
+                        </button>
+                    </div>
+                </div>
+            </CSSTransition>
+        </div>
+    );
+};
+
+export default DisplayData;

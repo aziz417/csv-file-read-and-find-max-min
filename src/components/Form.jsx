@@ -13,6 +13,8 @@ const Form = () => {
         project_description: '',
         client: '',
         contractor: '',
+        kp: '',
+        x: '',
         max_x: '',
         max_y: '',
         max_z: '',
