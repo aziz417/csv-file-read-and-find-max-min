@@ -23,13 +23,10 @@ ChartJS.register(
     Legend
 );
 
-
-
-
 const CSVUploadChart = () => {
-    let labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    let labels = [];
     const { formData, setFormData } = useAllInfo();
-
+    const [data, setData] = useState(null)
 
     const [options, setOptions] = useState({
         responsive: true,
@@ -39,15 +36,12 @@ const CSVUploadChart = () => {
             },
             title: {
                 display: true,
-                text: 'Chart.js Line Chart',
+                text: 'Show the chart.',
             },
         },
     })
-    const [data, setData] = useState(null)
-
 
     useEffect(() => {
-
         labels = formData.kp
         setData({
             labels,
@@ -62,8 +56,10 @@ const CSVUploadChart = () => {
             ],
         })
     }, [formData])
-    return data && <div className='flex'>
-        <Line options={options} data={data} />
-    </div>;
+
+    return data &&
+        <div className='flex bg-white h-full w-11/12'>
+            <Line options={options} data={data} />
+        </div>;
 }
 export default CSVUploadChart

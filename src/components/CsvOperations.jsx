@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAllInfo } from "../context/AllInformation";
 
 const CsvOperations = () => {
-    const [data, setData] = useState([]);
-    const [maxValue, setMaxValue] = useState(null);
-    const [minValue, setMinValue] = useState(null);
-    const [allData, setAlldata] = useState(null);
-
     const { formData, setFormData } = useAllInfo();
+    const [fileName, setFileName] = useState(null);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
+
         if (file) {
+            setFileName(file.name)
             const reader = new FileReader();
             reader.onload = (e) => {
                 const csvData = e.target.result.split('\n').map(row => row.split(','));
-                setData(csvData);
 
                 // Find max and min values from the CSV data
                 var dataList = { "kp": [], 'x_int': [], "x": [], "y": [], "z": [] }
-                csvData.slice(1, -1).map(row => { 
+                csvData.slice(1, -1).map(row => {
                     dataList.kp.push(parseFloat(row[0]))
                     dataList.x_int.push(parseInt(row[1]))
                     dataList.x.push(parseFloat(row[1]))
@@ -41,10 +38,6 @@ const CsvOperations = () => {
                         'min_z': Math.min(...dataList.z),
                     });
 
-                setMaxValue(Math.max(...values));
-                setMinValue(Math.min(...values));
-
-                setAlldata([...values]);
             };
 
             reader.readAsText(file);
@@ -52,13 +45,36 @@ const CsvOperations = () => {
     };
 
     return (
-        <div className='mb-4 my-4'>
-            <label htmlFor={'file'} className="block text-gray-700 text-sm font-bold mb-2">
-                Please Choose upload a csv file:
-            </label>
-            <input type="file" onChange={handleFileChange} />
-        </div>
+        <div className="flex w-full items-center justify-center bg-grey-lighter my-4">
 
+            <label
+                htmlFor='file'
+                className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue ">
+
+                <svg
+                    className="w-8 h-8"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
+                    />
+                </svg>
+                <span
+                    className="mt-2 text-base text-center leading-normal ">
+                    {fileName ?? "Please Choose upload a csv file"}
+                </span>
+
+                <input
+                    type="file"
+                    id='file'
+                    onChange={handleFileChange}
+                    className="hidden"
+                    accept=".csv"
+                />
+            </label>
+        </div>
     );
 };
 
