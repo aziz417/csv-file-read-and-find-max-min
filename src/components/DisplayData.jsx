@@ -3,7 +3,6 @@ import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { useRef } from 'react';
 import html2pdf from 'html2pdf.js';
-import CSVUploadChart from './CSVUploadChart';
 
 const DisplayData = ({ formData, onPrevStep, onSubmit }) => {
 
@@ -48,16 +47,18 @@ const DisplayData = ({ formData, onPrevStep, onSubmit }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {Object.entries(formData).map(([field, value]) => (
-                                    <tr key={field}>
-                                        <td className="border border-gray-800 p-2 capitalize">{field.replace("_", " ")}</td>
-                                        <td className="border border-gray-800 p-2">{value}</td>
-                                    </tr>
-                                ))}
+                                {Object.entries(formData).map(([field, value]) => {
+                                    return !['kp', 'x'].includes(field) &&
+                                        < tr key={field} >
+                                            <td className="border border-gray-800 p-2 capitalize">{field.replace("_", " ")}</td>
+                                            <td className="border border-gray-800 p-2">{value}</td>
+                                        </tr>
+                                }
+                                )}
                             </tbody>
                         </table>
                     </div>
-                    <CSVUploadChart />
+
                     <div className="mt-4">
                         <button
                             className="bg-blue-500 text-white px-4 py-2 rounded"
@@ -69,7 +70,7 @@ const DisplayData = ({ formData, onPrevStep, onSubmit }) => {
                             className="bg-green-500 text-white px-4 py-2 rounded ml-2"
                             onClick={onSubmit}
                         >
-                            Submit
+                            Show Chart
                         </button>
 
                         <button

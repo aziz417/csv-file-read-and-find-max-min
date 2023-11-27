@@ -18,9 +18,10 @@ const CsvOperations = () => {
                 setData(csvData);
 
                 // Find max and min values from the CSV data
-                var dataList = { "kp": [], "x": [], "y": [], "z": [] }
+                var dataList = { "kp": [], 'x_int': [], "x": [], "y": [], "z": [] }
                 csvData.slice(1, -1).map(row => { 
                     dataList.kp.push(parseFloat(row[0]))
+                    dataList.x_int.push(parseInt(row[1]))
                     dataList.x.push(parseFloat(row[1]))
                     dataList.y.push(parseFloat(row[2]))
                     dataList.z.push(parseFloat(row[3]))
@@ -31,7 +32,7 @@ const CsvOperations = () => {
                     {
                         ...formData,
                         'kp': [...dataList.kp],
-                        'x': [...dataList.x],
+                        'x': [...dataList.x_int],
                         'max_x': Math.max(...dataList.x),
                         'min_x': Math.min(...dataList.x),
                         'max_y': Math.max(...dataList.y),
@@ -49,8 +50,6 @@ const CsvOperations = () => {
             reader.readAsText(file);
         }
     };
-
-    console.log(formData);
 
     return (
         <div className='mb-4 my-4'>

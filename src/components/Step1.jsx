@@ -79,7 +79,14 @@ const Step1 = ({ formData, onChange, onNextStep }) => {
             </div> */}
 
             <button
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="
+                  bg-gradient-to-r
+                from-green-400
+                to-blue-500
+                hover:from-pink-500
+                hover:to-yellow-500
+                  px-4 py-2 rounded
+                "
                 onClick={onNextStep}
             >
                 Next

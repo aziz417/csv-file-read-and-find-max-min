@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAllInfo } from "../context/AllInformation";
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -21,40 +23,47 @@ ChartJS.register(
     Legend
 );
 
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: 'Chart.js Line Chart',
-        },
-    },
-};
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: [12, 34, 56, 56, 6, 8],
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-            label: 'Dataset 2',
-            data: [142, 54, 56, 56, 76, 8],
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-    ],
-};
 
 const CSVUploadChart = () => {
-    return <Line options={options} data={data} />;
+    let labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    const { formData, setFormData } = useAllInfo();
+
+
+    const [options, setOptions] = useState({
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Chart.js Line Chart',
+            },
+        },
+    })
+    const [data, setData] = useState(null)
+
+
+    useEffect(() => {
+
+        labels = formData.kp
+        setData({
+            labels,
+            datasets: [
+                {
+                    label: 'Dataset 1',
+                    data: formData.x,
+                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                },
+
+            ],
+        })
+    }, [formData])
+    return data && <div className='flex'>
+        <Line options={options} data={data} />
+    </div>;
 }
 export default CSVUploadChart

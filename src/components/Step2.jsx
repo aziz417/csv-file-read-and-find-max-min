@@ -41,7 +41,7 @@ const Step2 = ({ formData, onChange, onNextStep, onPrevStep }) => {
 
             <CsvOperations />
 
-            <hr className='border border-gray-700'/>
+            <hr className='border border-gray-700' />
             <div className='flex justify-between mt-4'>
 
                 <div>
@@ -94,10 +94,22 @@ const Step2 = ({ formData, onChange, onNextStep, onPrevStep }) => {
                 Previous
             </button>
             <button
-                className="bg-blue-500 text-white px-4 py-2 rounded ml-2"
+                className="
+                flex 
+                items-center
+                space-2
+                 bg-gradient-to-r
+                from-green-400
+                to-blue-500
+                hover:from-pink-500
+                hover:to-yellow-500
+                 px-4 py-2 rounded ml-2"
                 onClick={onNextStep}
             >
-                Next
+                
+                Next <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                    <path d="M334.5 414c8.8 3.8 19 2 26-4.6l144-136c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22l0 72L32 192c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32l288 0 0 72c0 9.6 5.7 18.2 14.5 22z" />
+                </svg>
             </button>
         </div>
     );
