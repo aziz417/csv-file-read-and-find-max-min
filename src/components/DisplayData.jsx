@@ -38,19 +38,19 @@ const DisplayData = ({ formData, onPrevStep, showChart }) => {
                     <div ref={divRef}>
                         <h2 className="text-lg font-semibold mb-4">Data Show Table</h2>
 
-                        <table className="w-full border-collapse border border-gray-800 mt-4" >
+                        <table className="w-full border-collapse border border-gray-300 mt-4" >
                             <thead className='bg-blue-600'>
                                 <tr>
-                                    <th className="border border-gray-800 p-2 text-white">Field</th>
-                                    <th className="border border-gray-800 p-2 text-white">Value</th>
+                                    <th className="border border-gray-300 p-2 text-white">Field</th>
+                                    <th className="border border-gray-300 p-2 text-white">Value</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {Object.entries(formData).map(([field, value]) => {
                                     return !['kp', 'x'].includes(field) &&
                                         <tr key={field} >
-                                            <td className="border border-gray-800 p-2 capitalize">{field.replace("_", " ")}</td>
-                                            <td className="border border-gray-800 p-2">{value}</td>
+                                            <td className="border border-gray-300 p-2 capitalize">{field.replace("_", " ")}</td>
+                                            <td className="border border-gray-300 p-2">{value}</td>
                                         </tr>
                                 }
                                 )}

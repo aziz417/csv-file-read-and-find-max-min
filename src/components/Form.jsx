@@ -1,5 +1,5 @@
 // Form.js
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import DisplayData from './DisplayData';
@@ -27,10 +27,13 @@ const Form = () => {
 
     const handleNextStep = () => {
         setStep(step + 1);
+        console.log(step);
+
     };
 
     const handlePrevStep = () => {
         setStep(step - 1);
+        console.log(step);
     };
 
     const handleChange = (field, value) => {
@@ -43,6 +46,8 @@ const Form = () => {
     const handleChart = (manage) => {
         setChartShow(manage)
     };
+
+
 
     return (
         <AllInfoContext.Provider value={{ formData, setFormData }} >
@@ -83,7 +88,7 @@ const Form = () => {
 
                                     <ol className="grid grid-cols-1 divide-x divide-gray-100 overflow-hidden rounded-lg border border-gray-100 text-sm text-gray-500 sm:grid-cols-3"
                                     >
-                                        <li onClick={() => setStep(1)} className={`flex items-center justify-center gap-2 p-4 bg-blue-${step == 1 ? 700 : 500} cursor-pointer`}>
+                                        <li onClick={() => setStep(1)} className={`flex items-center justify-center gap-2 p-4 ${step == 1 ? 'bg-blue-700' : 'bg-blue-500'} cursor-pointer`}>
                                             <svg
                                                 className="h-7 w-7 shrink-0 text-white"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +110,7 @@ const Form = () => {
                                         </li>
 
                                         <li onClick={() => setStep(2)}
-                                            className={`relative flex items-center justify-center gap-2 bg-blue-${step == 2 ? 700 : 500} p-4 cursor-pointer`}
+                                            className={`relative flex items-center justify-center gap-2 ${step == 2 ? 'bg-blue-700' : 'bg-blue-500'} p-4 cursor-pointer`}
                                         >
                                             <span
                                                 className="absolute -left-2 top-1/2 hidden h-4 w-4 -translate-y-1/2 rotate-45 border border-gray-100 ltr:border-b-0 ltr:border-s-0 ltr:bg-white rtl:border-e-0 rtl:border-t-0 rtl:bg-gray-50 sm:block"
@@ -139,7 +144,7 @@ const Form = () => {
                                             </p>
                                         </li>
 
-                                        <li onClick={() => setStep(3)} className={`flex items-center justify-center gap-2 p-4 bg-blue-${step == 3 ? 700 : 500} cursor-pointer`}>
+                                        <li onClick={() => setStep(3)} className={`flex items-center justify-center gap-2 p-4 ${step == 3 ? 'bg-blue-700' : 'bg-blue-500'} cursor-pointer`}>
                                             <svg
                                                 className="h-7 w-7 shrink-0 text-white"
                                                 xmlns="http://www.w3.org/2000/svg"
